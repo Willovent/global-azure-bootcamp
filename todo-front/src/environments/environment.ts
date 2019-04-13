@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://todongssr.azurewebsites.net/api'
+  apiUrl: 'https://localhost:5001/api',
+  applicationInsightKey: '41562bda-e522-49e1-a729-9c867ecf3547'
 };
 
 /*
@@ -14,4 +15,4 @@ export const environment = {
  * This import should be commented out in production mode because it will have a negative impact
  * on performance if an error is thrown.
  */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+import 'zone.js/dist/zone-error';  // Included with Angular CLI.

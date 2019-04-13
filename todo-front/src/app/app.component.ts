@@ -1,6 +1,8 @@
 import { TodoService } from './services/todo.service';
 import { Component, OnInit } from '@angular/core';
 import { Todo } from './models/todo';
+import { finalize } from 'rxjs/operators';
+import { LoggingService } from './services/logging.service';
 
 @Component({
   selector: 'app-root',
@@ -10,8 +12,9 @@ import { Todo } from './models/todo';
 export class AppComponent implements OnInit {
   public todos: Todo[] = [];
   public newTodo: string;
+  loading: boolean;
 
-  constructor(private todoService: TodoService) { }
+  constructor(private todoService: TodoService, private loggingService: LoggingService) { }
 
   ngOnInit() {
     this.todoService.getTodos().subscribe(todos => {
@@ -20,8 +23,17 @@ export class AppComponent implements OnInit {
   }
 
   addTodo() {
-    this.todos.push({ name: this.newTodo, done: false });
+    this.todos.push({ id: null, name: this.newTodo, done: false });
     this.newTodo = '';
+    this.loggingService.logTrace('todo added');
+  }
+
+  saveTodos() {
+    this.loading = true;
+    this.loggingService.logTrace('todo save');
+    this.todoService.saveTodos(this.todos)
+      .pipe(finalize(() => this.loading = false))
+      .subscribe(todos => this.todos = todos);
   }
 
 }
