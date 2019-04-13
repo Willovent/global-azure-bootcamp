@@ -36,6 +36,13 @@ namespace todo_api
                 app.UseHsts();
             }
 
+            app.UseCors(configurePolicy =>
+            {
+                configurePolicy.AllowAnyHeader()
+                .AllowAnyOrigin()
+                .AllowAnyMethod();
+            });
+
             app.UseHttpsRedirection();
             app.UseMvc();
         }
