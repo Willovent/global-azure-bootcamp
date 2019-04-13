@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using TodoApi.Data;
 
 namespace todo_api.Controllers
@@ -22,10 +23,13 @@ namespace todo_api.Controllers
         }
 
         [HttpPost]
-        public async Task Post([FromServices] TodoContext todoContext, [FromBody] Todo value)
+        public async Task<IEnumerable<Todo>> Post([FromServices] TodoContext todoContext, [FromServices] ILogger<TodosController> logger, [FromBody] List<Todo> todos)
         {
-            todoContext.Todos.Add(value);
+            todoContext.RemoveRange(todoContext.Todos);
+            await todoContext.Todos.AddRangeAsync(todos);
             await todoContext.SaveChangesAsync();
+            logger.LogInformation($"{todos.Count} Todos saved");
+            return todos;
         }
 
         [HttpPut("{id}")]

@@ -5,11 +5,14 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <RootNamespace>todo_api</RootNamespace>
     <UserSecretsId>1a9d557f-5a1f-4208-be44-eae6190bd181</UserSecretsId>
+    <ApplicationInsightsResourceId>/subscriptions/3e8113cc-b5fa-434a-b6c1-43eb83af265b/resourcegroups/global-azure-bootcamp/providers/microsoft.insights/components/global-azure-bootcamp</ApplicationInsightsResourceId>
+    <ApplicationInsightsAnnotationResourceId>/subscriptions/3e8113cc-b5fa-434a-b6c1-43eb83af265b/resourcegroups/global-azure-bootcamp/providers/microsoft.insights/components/global-azure-bootcamp</ApplicationInsightsAnnotationResourceId>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.6.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.Extensions.Logging.ApplicationInsights" Version="2.9.1" />
   </ItemGroup>
 
   <ItemGroup>
