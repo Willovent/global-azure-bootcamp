@@ -1,0 +1,9 @@
+<div>
+  <h1>Todos</h1>
+  <ul>
+    <li *ngFor="let todo of todos" [class.complete]="todo.done" (click)="todo.done = !todo.done">
+      <span>{{todo.name}}</span>
+    </li>
+  </ul>
+  <input type="text" [(ngModel)]="newTodo"  #ctrl="ngModel" (keyup.enter)="addTodo()">
+</div>
