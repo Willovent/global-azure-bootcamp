@@ -12,4 +12,8 @@ export class TodoService {
   public getTodos(): Observable<Todo[]> {
     return this.http.get<Todo[]>(`${environment.apiUrl}/todos`);
   }
+
+  public saveTodos(todos: Todo[]): Observable<Todo[]> {
+    return this.http.post<Todo[]>(`${environment.apiUrl}/todos`, todos);
+  }
 }

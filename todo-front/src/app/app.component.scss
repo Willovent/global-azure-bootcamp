@@ -12,12 +12,14 @@
         min-width: 300px;
         max-width: 100%;
         border-radius: 5px;
+        display: flex;
+        flex-direction: column;
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 
         h1 {
             animation: wiggle 0.25s 2;
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 0;
             margin-top: -5px;
         }
 
@@ -46,15 +48,16 @@
                         border-radius: 1px;
                         background: #2E2E2E;
                         transform: scaleX(0);
-                        transition: transform 0.5s;
+                        transition: transform 0.2s;
                         transform-origin: center right;
                     }
                 }
 
                 &:after {
-                    font-family: FontAwesome;
+                    font-family: "Font Awesome 5 Free";
                     content: "\f00c";
                     position: absolute;
+                    font-weight: 900;
                     right: .75rem;
                     color: #2ecc71;
                     opacity: 0;
@@ -85,7 +88,6 @@
         }
 
         input {
-            width: 100%;
             padding: 10px;
             border: 1px solid rgba(211, 211, 211, 0.534);
             border-radius: 3px;
@@ -96,6 +98,36 @@
             &:focus {
                 background-color: white;
                 outline: none;
+            }
+        }
+
+        span.button {
+            $width: 40px;
+            width: $width;
+            height: $width;
+            border-radius: $width/2;
+            background-color: #6ad2ff;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: $width/2;
+            align-self: flex-end;
+            margin: 12px 0;
+            cursor: pointer;
+            transition: box-shadow 0.1s, background-color 0.1s;
+            box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+
+            &.loading {
+                background-color: #fda956
+            }
+
+            i {
+                transition: transform 0.1s;
+            }
+
+            &:hover {
+                box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
             }
         }
     }

@@ -6,4 +6,5 @@
     </li>
   </ul>
   <input type="text" [(ngModel)]="newTodo"  #ctrl="ngModel" (keyup.enter)="addTodo()">
+  <span class="button" [class.loading]="loading" (click)="saveTodos()"> <i class="fas fa-save"></i></span>
 </div>
