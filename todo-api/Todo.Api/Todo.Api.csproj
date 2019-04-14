@@ -3,11 +3,15 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
-    <RootNamespace>todo_api</RootNamespace>
+    <RootNamespace>Todo.Api</RootNamespace>
     <UserSecretsId>1a9d557f-5a1f-4208-be44-eae6190bd181</UserSecretsId>
     <ApplicationInsightsResourceId>/subscriptions/3e8113cc-b5fa-434a-b6c1-43eb83af265b/resourcegroups/global-azure-bootcamp/providers/microsoft.insights/components/global-azure-bootcamp</ApplicationInsightsResourceId>
     <ApplicationInsightsAnnotationResourceId>/subscriptions/3e8113cc-b5fa-434a-b6c1-43eb83af265b/resourcegroups/global-azure-bootcamp/providers/microsoft.insights/components/global-azure-bootcamp</ApplicationInsightsAnnotationResourceId>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Program.cs~RFe23ea3.TMP" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.6.1" />
