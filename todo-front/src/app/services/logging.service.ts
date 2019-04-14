@@ -1,6 +1,6 @@
 import { environment } from '../../environments/environment';
 import { Injectable } from '@angular/core';
-import { ApplicationInsights, SeverityLevel } from '@microsoft/applicationinsights-web';
+import { ApplicationInsights, SeverityLevel, PropertiesPlugin } from '@microsoft/applicationinsights-web';
 
 @Injectable({ providedIn: 'root' })
 export class LoggingService {
@@ -9,8 +9,7 @@ export class LoggingService {
   constructor() {
     this.appInsights = new ApplicationInsights({
       config: {
-        instrumentationKey: environment.applicationInsightKey,
-        enableCorsCorrelation: true
+        instrumentationKey: environment.applicationInsightKey
       }
     });
     this.appInsights.loadAppInsights();
@@ -22,5 +21,9 @@ export class LoggingService {
 
   logPageView(name: string, isLoggedIn: boolean, uri: string) {
     this.appInsights.trackPageView({ name, isLoggedIn, uri });
+  }
+
+  getOperationId() {
+    return this.appInsights.context.telemetryTrace.traceID;
   }
 }
