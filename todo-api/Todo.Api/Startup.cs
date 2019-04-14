@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using TodoApi.Data;
+using Todo.Initializer;
+using Todo.Data;
+using Microsoft.ApplicationInsights.Extensibility;
 
-namespace todo_api
+namespace Todo
 {
     public class Startup
     {
@@ -20,6 +22,9 @@ namespace todo_api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<TodoContext>(opts => opts.UseSqlServer(Configuration["ConnectionString"]));
+            services.AddHttpContextAccessor();
+            services.AddSingleton<ITelemetryInitializer, CorrelationIdTelemetryInitializer>();
+            services.AddApplicationInsightsTelemetry();
             services.AddMvc();
         }
 

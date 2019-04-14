@@ -1,4 +1,4 @@
-﻿namespace TodoApi.Data
+﻿namespace Todo.Data
 {
     public class Todo
     {

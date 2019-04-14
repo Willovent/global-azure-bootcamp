@@ -3,27 +3,27 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using TodoApi.Data;
+using Todo.Data;
 
-namespace todo_api.Controllers
+namespace Todo.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class TodosController : ControllerBase
     {
         [HttpGet]
-        public async Task<IEnumerable<Todo>> Get([FromServices] TodoContext todoContext)
+        public async Task<IEnumerable<Data.Todo>> Get([FromServices] TodoContext todoContext)
         {
             return await todoContext.Todos.ToListAsync();
         }
 
-        public async Task<Todo> Get([FromServices] TodoContext todoContext, int id)
+        public async Task<Data.Todo> Get([FromServices] TodoContext todoContext, int id)
         {
             return await todoContext.Todos.FindAsync(id);
         }
 
         [HttpPost]
-        public async Task<IEnumerable<Todo>> Post([FromServices] TodoContext todoContext, [FromServices] ILogger<TodosController> logger, [FromBody] List<Todo> todos)
+        public async Task<IEnumerable<Data.Todo>> Post([FromServices] TodoContext todoContext, [FromServices] ILogger<TodosController> logger, [FromBody] List<Data.Todo> todos)
         {
             todoContext.RemoveRange(todoContext.Todos);
             await todoContext.Todos.AddRangeAsync(todos);
@@ -33,7 +33,7 @@ namespace todo_api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task Put([FromServices] TodoContext todoContext, int id, [FromBody] Todo value)
+        public async Task Put([FromServices] TodoContext todoContext, int id, [FromBody] Data.Todo value)
         {
             value.Id = id;
             todoContext.Todos.Update(value);
@@ -43,7 +43,7 @@ namespace todo_api.Controllers
         [HttpDelete("{id}")]
         public async Task Delete([FromServices] TodoContext todoContext, int id)
         {
-            todoContext.Todos.Remove(new Todo { Id = id });
+            todoContext.Todos.Remove(new Data.Todo { Id = id });
             await todoContext.SaveChangesAsync();
         }
     }

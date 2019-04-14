@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.ApplicationInsights;
 
-namespace todo_api
+namespace Todo
 {
     public class Program
     {
