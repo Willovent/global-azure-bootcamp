@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs;
+using Todo.Core.Clients;
 
 namespace Todo.WebJob
 {
@@ -11,7 +12,7 @@ namespace Todo.WebJob
     {
         static void Main()
         {
-            var config = new JobHostConfiguration();
+            var config = new JobHostConfiguration("UseDevelopmentStorage=true");
 
             if (config.IsDevelopment)
             {

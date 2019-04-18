@@ -7,7 +7,6 @@ namespace Todo.Core
     public class TodoActionMessageQueue
     {
         public string CorrelationId { get; set; }
-        public int Id { get; set; }
-        public int State { get; set; }
+        public string TodoName { get; set; }
     }
 }
