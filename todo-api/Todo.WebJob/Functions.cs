@@ -11,15 +11,10 @@ namespace Todo.WebJob
 {
     public class Functions
     {
-        private readonly ILogger _logger;
+        private readonly ILogger<Functions> _logger;
         private DiscordClient _discordClient;
 
-        public Functions()
-        {
-
-        }
-
-        public Functions(ILogger logger, DiscordClient discordClient)
+        public Functions(ILogger<Functions> logger, DiscordClient discordClient)
         {
             _logger = logger;
             _discordClient = discordClient;
@@ -29,7 +24,7 @@ namespace Todo.WebJob
         // on an Azure Queue called queue.
         public async Task ProcessTodoActionMessageAsync([QueueTrigger("todo-done-queue")] string message)
         {
-            //_logger.LogInformation(message);
+            _logger.LogInformation(message);
             //TodoActionMessageQueue msg = JsonConvert.DeserializeObject<TodoActionMessageQueue>(message);
             TodoActionMessageQueue msg = new TodoActionMessageQueue
             {
@@ -38,12 +33,12 @@ namespace Todo.WebJob
             };
             try
             {
-                _discordClient = new DiscordClient("https://discordapp.com/api/webhooks/568553400803786778/27l9zIA1D8BbntAhcNfkwzMJ47euGm95OyrA_j9qtItFPg3bC156lDOHOFwwtTJFfgzk");
                 bool res = await _discordClient.SendMessageAsync(GetSlackMessage(msg));
+                _logger.LogInformation("Message envoyé !");
             }
             catch (Exception e)
             {
-                //_logger.LogError(e, "Une erreur est survenue lors de l'envoi au webhook :(");
+                _logger.LogError(e, "Une erreur est survenue lors de l'envoi au webhook :(");
             }
         }
 
