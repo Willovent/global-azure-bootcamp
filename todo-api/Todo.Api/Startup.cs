@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Todo.Initializer;
 using Todo.Data;
 using Microsoft.ApplicationInsights.Extensibility;
+using Todo.Core.Clients;
 
 namespace Todo
 {
@@ -24,6 +25,7 @@ namespace Todo
             services.AddDbContext<TodoContext>(opts => opts.UseSqlServer(Configuration["ConnectionString"]));
             services.AddHttpContextAccessor();
             services.AddSingleton<ITelemetryInitializer, CorrelationIdTelemetryInitializer>();
+            services.AddSingleton<TodoQueueClient>();
             services.AddApplicationInsightsTelemetry();
             services.AddMvc();
         }
