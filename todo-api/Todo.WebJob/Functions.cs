@@ -33,7 +33,7 @@ namespace Todo.WebJob
             };
             try
             {
-                bool res = await _discordClient.SendMessageAsync(GetSlackMessage(msg));
+                bool res = await _discordClient.SendMessageAsync(GetDiscordMessage(msg));
                 _logger.LogInformation("Message envoyé !");
             }
             catch (Exception e)
@@ -42,7 +42,7 @@ namespace Todo.WebJob
             }
         }
 
-        private DiscordMessage GetSlackMessage(TodoActionMessageQueue message)
+        private DiscordMessage GetDiscordMessage(TodoActionMessageQueue message)
         {
             return new DiscordMessage()
             {
