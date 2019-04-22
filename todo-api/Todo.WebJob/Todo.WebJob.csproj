@@ -1,15 +1,25 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net472</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
     <AssemblyName>Todo.WebJob</AssemblyName>
+    <UserSecretsId>fb9b911b-d594-4387-80df-52f24cf6ca8f</UserSecretsId>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="appsettings.json" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Azure.WebJobs.ServiceBus" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Azure.WebJobs" Version="3.0.6" />
+    <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.Storage" Version="3.0.5" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.ApplicationInsights" Version="2.9.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="2.2.0" />
