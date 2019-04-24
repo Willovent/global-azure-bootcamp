@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "Todo.WebJob": {
+      "commandName": "Project"
+    }
+  }
+}
