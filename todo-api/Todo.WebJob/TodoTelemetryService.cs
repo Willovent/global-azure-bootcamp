@@ -1,20 +1,20 @@
 ﻿
+using Microsoft.ApplicationInsights;
+
 namespace Todo.WebJob
 {
     public class TodoTelemetryService
     {
-        public TodoTelemetryService(string instrumentatinKey)
+        private readonly TelemetryClient _telemetryClient;
+
+        public TodoTelemetryService(TelemetryClient telemetryClient)
         {
+            _telemetryClient = telemetryClient;
         }
 
-
-        public void SetOperationId(string operationId)
+        public void SetOperationId(string correlationId)
         {
-        }
-
-        public string GetOperationId()
-        {
-            return "";
+            _telemetryClient.Context.Operation.ParentId = correlationId;
         }
     }
 }

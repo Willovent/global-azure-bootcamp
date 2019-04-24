@@ -19,7 +19,7 @@ namespace Todo.Initializer
             string operationId = (headers != null && headers.ContainsKey("Request-Id")) ? headers["Request-Id"].ToString() : null;
             if (operationId != null)
             {
-                telemetry.Context.GlobalProperties["Operation Id"] = operationId;
+                telemetry.Context.Operation.ParentId = operationId;
             }
         }
     }

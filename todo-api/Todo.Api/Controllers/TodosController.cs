@@ -25,7 +25,11 @@ namespace Todo.Controllers
         }
 
         [HttpPost]
-        public async Task<IEnumerable<Data.Todo>> Post([FromServices] TodoQueueClient todoQueueClient, [FromServices] TodoContext todoContext, [FromServices] ILogger<TodosController> logger, [FromBody] List<Data.Todo> todos)
+        public async Task<IEnumerable<Data.Todo>> Post(
+            [FromServices] TodoQueueClient todoQueueClient, 
+            [FromServices] TodoContext todoContext, 
+            [FromServices] ILogger<TodosController> logger, 
+            [FromBody] List<Data.Todo> todos)
         {
             var doneTodos = todos.Where(x => x.Done);
             var doneTodosIds = doneTodos.Select(x => x.Id);
