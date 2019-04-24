@@ -23,8 +23,7 @@ namespace Todo.WebJob
                })
                .ConfigureLogging((context, builder) =>
                {
-                   builder.AddConfiguration(context.Configuration.GetSection("Logging"))
-                          .AddApplicationInsights(context.Configuration["ApplicationInsights:InstrumentationKey"]);
+                   builder.AddConfiguration(context.Configuration.GetSection("Logging"));
 #if DEBUG
                    builder.AddConsole();
 #endif
@@ -32,6 +31,7 @@ namespace Todo.WebJob
                .ConfigureServices((context, services) =>
                {
                    services.AddSingleton<Functions>();
+                   services.AddScoped<TodoTelemetryService>(_ => new TodoTelemetryService(context.Configuration["ApplicationInsights:InstrumentationKey"]));
                    services.AddSingleton(new DiscordClient(context.Configuration["DiscordWebhook"]));
                })
                .ConfigureWebJobs(builder => builder.AddAzureStorage())

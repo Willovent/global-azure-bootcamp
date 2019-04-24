@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.ApplicationInsights;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -38,9 +37,9 @@ namespace Todo.Controllers
 
             newlyDoneTodos = newlyDoneTodos.Union(doneTodos.Where(x => x.Id == null)).ToList();
 
-            foreach(var todo in newlyDoneTodos)
+            foreach (var todo in newlyDoneTodos)
             {
-                todoQueueClient.SendMessage(new Core.TodoActionMessageQueue
+                await todoQueueClient.SendMessageAsync(new Core.TodoActionMessageQueue
                 {
                     TodoName = todo.Name,
                     CorrelationId = System.Diagnostics.Activity.Current.RootId
