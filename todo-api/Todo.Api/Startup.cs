@@ -22,10 +22,10 @@ namespace Todo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<TodoContext>(opts => opts.UseSqlServer(Configuration["ConnectionString"]));
+            services.AddDbContext<TodoContext>(opts => opts.UseSqlServer(Configuration.GetConnectionString("Context")));
             services.AddHttpContextAccessor();
             services.AddSingleton<ITelemetryInitializer, CorrelationIdTelemetryInitializer>();
-            services.AddSingleton<TodoQueueClient>();
+            services.AddSingleton(_ => new TodoQueueClient(Configuration.GetConnectionString("StorageAccount")));
             services.AddApplicationInsightsTelemetry();
             services.AddMvc();
         }

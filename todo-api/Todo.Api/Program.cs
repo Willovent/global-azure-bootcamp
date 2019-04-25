@@ -14,9 +14,10 @@ namespace Todo
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
+                .UseApplicationInsights()
                 .ConfigureLogging((context, builder) =>
                 {
-                    builder.AddApplicationInsights(context.Configuration["ApplicationInsights:InstrumentationKey"]);
+                    builder.AddApplicationInsights();
                 });
     }
 }
