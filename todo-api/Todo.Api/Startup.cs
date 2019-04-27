@@ -3,10 +3,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Todo.Initializer;
+using Todo.Initializers;
 using Todo.Data;
 using Microsoft.ApplicationInsights.Extensibility;
 using Todo.Core.Clients;
+using Todo.Core.Initializers;
 
 namespace Todo
 {
@@ -25,6 +26,7 @@ namespace Todo
             services.AddDbContext<TodoContext>(opts => opts.UseSqlServer(Configuration.GetConnectionString("Context")));
             services.AddHttpContextAccessor();
             services.AddSingleton<ITelemetryInitializer, CorrelationIdTelemetryInitializer>();
+            services.AddSingleton<ITelemetryInitializer, AppNameInitializer>(_ => new AppNameInitializer("Todo.Api"));
             services.AddSingleton(_ => new TodoQueueClient(Configuration.GetConnectionString("StorageAccount")));
             services.AddApplicationInsightsTelemetry();
             services.AddMvc();

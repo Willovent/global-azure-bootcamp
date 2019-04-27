@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
 using System.IO;
+using Microsoft.ApplicationInsights.Extensibility;
+using Todo.Core.Initializers;
 
 namespace Todo.WebJob
 {
@@ -33,6 +35,7 @@ namespace Todo.WebJob
                {
                    services.AddSingleton<Functions>();
                    services.AddSingleton<TodoTelemetryService>();
+                   services.AddSingleton<ITelemetryInitializer, AppNameInitializer>(_ => new AppNameInitializer("Todo.Job"));
                    services.AddSingleton(new DiscordClient(context.Configuration["DiscordWebhook"]));
                })
                .ConfigureWebJobs(builder => builder.AddAzureStorage())

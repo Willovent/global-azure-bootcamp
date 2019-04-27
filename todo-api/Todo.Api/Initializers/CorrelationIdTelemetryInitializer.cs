@@ -2,7 +2,7 @@
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.AspNetCore.Http;
 
-namespace Todo.Initializer
+namespace Todo.Initializers
 {
     public class CorrelationIdTelemetryInitializer : ITelemetryInitializer
     {
